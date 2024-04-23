@@ -1,7 +1,7 @@
 from itertools import permutations
 
 
-# 1
+# 1 https://projecteuler.net/problem=1
 def multiples_of_3_or_5():
     result = 0
     for num in range(1000):
@@ -10,7 +10,7 @@ def multiples_of_3_or_5():
     return result
 
 
-# 2
+# 2 https://projecteuler.net/problem=2
 def even_fibonacci_numbers():
     previous = 2
     current = 3
@@ -23,7 +23,7 @@ def even_fibonacci_numbers():
     return result
 
 
-# 26
+# 26 https://projecteuler.net/problem=26
 def reciprocal_cycles():
     cycle_length = 0
     result = 0
@@ -47,7 +47,7 @@ def reciprocal_cycles():
     return result
 
 
-# 43
+# 43 https://projecteuler.net/problem=43
 def sub_string_divisibility():
     result = 0
     divisors = [2, 3, 5, 7, 11, 13, 17]
@@ -74,7 +74,7 @@ def sub_string_divisibility():
     return result
 
 
-# 99
+# 99 https://projecteuler.net/problem=99
 def largest_exponential():
     def a_greater_b(a, b):
         if a[1] < b[1]:
