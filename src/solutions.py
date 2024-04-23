@@ -74,11 +74,19 @@ def sub_string_divisibility():
     return result
 
 
-# 99 WIP
+# 99
 def largest_exponential():
-    input = open('../data/0099_base_exp.txt', 'r')
-    lines = input.read().splitlines()
-    result = -1
-    for idx in range(0, len(lines)):
-        print(lines[idx])
-    return result
+    def a_greater_b(a, b):
+        if a[1] < b[1]:
+            return pow(b[0], b[1] / a[1]) < a[0]
+        else:
+            return pow(a[0], a[1] / b[1]) > b[0]
+
+    highest_index = 0
+    input_data = open('../data/0099_base_exp.txt', 'r')
+    values = [tuple(int(y) for y in x.split(',')) for x in input_data.read().splitlines()]
+    for idx in range(1, len(values)):
+        if a_greater_b(values[idx], values[highest_index]):
+            highest_index = idx
+
+    return highest_index + 1 #return line number
