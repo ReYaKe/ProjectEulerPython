@@ -72,3 +72,13 @@ def sub_string_divisibility():
             permutation[9]
         )
     return result
+
+
+# 99 WIP
+def largest_exponential():
+    input = open('../data/0099_base_exp.txt', 'r')
+    lines = input.read().splitlines()
+    result = -1
+    for idx in range(0, len(lines)):
+        print(lines[idx])
+    return result
