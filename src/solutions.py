@@ -1,5 +1,5 @@
 from itertools import permutations
-
+import math
 
 # 1 https://projecteuler.net/problem=1
 def multiples_of_3_or_5():
@@ -90,3 +90,39 @@ def largest_exponential():
             highest_index = idx
 
     return highest_index + 1 #return line number
+
+
+# 102 https://projecteuler.net/problem=102
+def triangle_containment():
+    def vector_length(a: int, b: int):
+        return math.sqrt(pow(a, 2) + pow(b, 2))
+
+    input_data = open('../data/0102_triangles.txt', 'r')
+    triangles = [tuple(int(y) for y in x.split(',')) for x in input_data.read().splitlines()]
+    count = 0
+    for triangle in triangles:
+        # Heron's formula for area
+        a = vector_length(triangle[0] - triangle[2], triangle[1] - triangle[3])
+        b = vector_length(triangle[2] - triangle[4], triangle[3] - triangle[5])
+        c = vector_length(triangle[4] - triangle[0], triangle[5] - triangle[1])
+        s = (a + b + c) * 0.5
+        area = math.sqrt(s * (s - a) * (s - b) * (s - c))
+
+        # Lengths of origin to each point
+        oa = vector_length(triangle[0], triangle[1])
+        ob = vector_length(triangle[2], triangle[3])
+        oc = vector_length(triangle[4], triangle[5])
+
+        # Semiperimeter of each sub-triangle
+        sa = (a + oa + ob) * 0.5
+        sb = (b + ob + oc) * 0.5
+        sc = (c + oc + oa) * 0.5
+
+        # Area of each sub-triangle
+        subarea_a = math.sqrt(sa * (sa - a) * (sa - oa) * (sa - ob))
+        subarea_b = math.sqrt(sb * (sb - b) * (sb - ob) * (sb - oc))
+        subarea_c = math.sqrt(sc * (sc - c) * (sc - oc) * (sc - oa))
+
+        if math.isclose(area, subarea_a + subarea_b + subarea_c):
+            count += 1
+    return count
