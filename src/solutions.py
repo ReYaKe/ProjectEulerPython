@@ -127,6 +127,7 @@ def triangle_containment():
     input_data = open('../data/0102_triangles.txt', 'r')
     triangles = [tuple(int(y) for y in x.split(',')) for x in input_data.read().splitlines()]
     count = 0
+    input_data.close()
     for triangle in triangles:
         # Heron's formula for area
         a = vector_length(triangle[0] - triangle[2], triangle[1] - triangle[3])
