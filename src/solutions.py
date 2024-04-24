@@ -23,6 +23,12 @@ def even_fibonacci_numbers():
     return result
 
 
+# 24 https://projecteuler.net/problem=24
+def lexicographic_permutations():
+    # itertools permutations emits values in lexicographic order
+    return ''.join(list(permutations(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']))[999_999])
+
+
 # 26 https://projecteuler.net/problem=26
 def reciprocal_cycles():
     cycle_length = 0
@@ -72,6 +78,27 @@ def sub_string_divisibility():
             permutation[9]
         )
     return result
+
+
+# 45 https://projecteuler.net/problem=45 WIP
+def triangular_pentagonal_and_hexagonal():
+    def is_pentagonal(num: int):
+        return ((math.sqrt(24 * num + 1) + 1) / 6.0).is_integer()
+
+    def is_hexagonal(num: int):
+        return ((1 + math.sqrt(1 + 8 * num)) / 4.0).is_integer()
+
+    def nth_triangular(idx: int):
+        return int(idx * (idx + 1) * 0.5)
+
+    n = 286
+    while True:
+        current = nth_triangular(n)
+
+        if is_pentagonal(current) and is_hexagonal(current):
+            return current
+
+        n += 1
 
 
 # 99 https://projecteuler.net/problem=99
