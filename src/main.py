@@ -8,4 +8,5 @@ from solutions import *
 # print("#45 Triangular, Pentagonal, and Hexagonal : " + str(triangular_pentagonal_and_hexagonal()))
 # print("#99 Largest Exponential : " + str(largest_exponential()))
 # print("#102 Triangle Containment : " + str(triangle_containment()))
-print("#206 Concealed Square : " + str(concealed_square()))
+print("#205 Dice Game : " + str(dice_game()))
+# print("#206 Concealed Square : " + str(concealed_square()))

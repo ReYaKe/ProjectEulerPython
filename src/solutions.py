@@ -1,3 +1,4 @@
+import itertools
 from itertools import permutations
 import math
 
@@ -158,6 +159,27 @@ def triangle_containment():
         if math.isclose(area, subarea_a + subarea_b + subarea_c):
             count += 1
     return count
+
+
+# 205 https://projecteuler.net/problem=205
+def dice_game():
+    import collections
+
+    win = 0
+    draw = 0
+    loss = 0
+
+    for p_key, p_value in dict(collections.Counter([sum(x) for x in itertools.product([1, 2, 3, 4], repeat = 9)])).items():
+        for c_key, c_value in dict(collections.Counter([sum(x) for x in itertools.product([1, 2, 3, 4, 5, 6], repeat = 6)])).items():
+            if p_key > c_key:
+                win += p_value * c_value
+            elif p_key < c_key:
+                loss += p_value * c_value
+            else:
+                draw += p_value * c_value
+            pass
+
+    return '{0:.7f}'.format(1.0 / (win + draw + loss) * win)
 
 
 # 206 https://projecteuler.net/problem=206
