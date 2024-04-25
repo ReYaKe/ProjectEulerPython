@@ -1,6 +1,7 @@
 from itertools import permutations
 import math
 
+
 # 1 https://projecteuler.net/problem=1
 def multiples_of_3_or_5():
     result = 0
@@ -109,14 +110,16 @@ def largest_exponential():
         else:
             return pow(a[0], a[1] / b[1]) > b[0]
 
+    with open('../data/0099_base_exp.txt', 'r') as input_data:
+        values = [tuple(int(y) for y in x.split(',')) for x in input_data.read().splitlines()]
+
     highest_index = 0
-    input_data = open('../data/0099_base_exp.txt', 'r')
-    values = [tuple(int(y) for y in x.split(',')) for x in input_data.read().splitlines()]
+
     for idx in range(1, len(values)):
         if a_greater_b(values[idx], values[highest_index]):
             highest_index = idx
 
-    return highest_index + 1 #return line number
+    return highest_index + 1  # return line number
 
 
 # 102 https://projecteuler.net/problem=102
@@ -124,10 +127,11 @@ def triangle_containment():
     def vector_length(a: int, b: int):
         return math.sqrt(pow(a, 2) + pow(b, 2))
 
-    input_data = open('../data/0102_triangles.txt', 'r')
-    triangles = [tuple(int(y) for y in x.split(',')) for x in input_data.read().splitlines()]
+    with open('../data/0102_triangles.txt', 'r') as input_data:
+        triangles = [tuple(int(y) for y in x.split(',')) for x in input_data.read().splitlines()]
+
     count = 0
-    input_data.close()
+
     for triangle in triangles:
         # Heron's formula for area
         a = vector_length(triangle[0] - triangle[2], triangle[1] - triangle[3])
@@ -154,3 +158,30 @@ def triangle_containment():
         if math.isclose(area, subarea_a + subarea_b + subarea_c):
             count += 1
     return count
+
+
+# 206 https://projecteuler.net/problem=206
+def concealed_square():
+    # this gives the correct answer, but its terrible and slow
+    from math import isqrt
+
+    lower = isqrt(1020304050607080900)
+    upper = isqrt(1929394959697989990)
+
+    for num in range(lower, upper + 1):
+        power = str(pow(num, 2))
+        if (
+                power[0] == '1' and
+                power[2] == '2' and
+                power[4] == '3' and
+                power[6] == '4' and
+                power[8] == '5' and
+                power[10] == '6' and
+                power[12] == '7' and
+                power[14] == '8' and
+                power[16] == '9' and
+                power[18] == '0'
+        ):
+            return num
+
+    return 0

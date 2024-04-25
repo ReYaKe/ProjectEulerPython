@@ -5,6 +5,7 @@ from solutions import *
 # print("#24 Lexicographic Permutations : " + str(lexicographic_permutations()))
 # print("#26 Reciprocal Cycles : " + str(reciprocal_cycles()))
 # print("#43 Sub-string Divisibility : " + str(sub_string_divisibility()))
-print("#45 Triangular, Pentagonal, and Hexagonal : " + str(triangular_pentagonal_and_hexagonal()))
+# print("#45 Triangular, Pentagonal, and Hexagonal : " + str(triangular_pentagonal_and_hexagonal()))
 # print("#99 Largest Exponential : " + str(largest_exponential()))
 # print("#102 Triangle Containment : " + str(triangle_containment()))
+print("#206 Concealed Square : " + str(concealed_square()))
