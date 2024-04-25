@@ -169,14 +169,14 @@ def dice_game():
     draw = 0
     loss = 0
 
-    for p_key, p_value in dict(collections.Counter([sum(x) for x in itertools.product([1, 2, 3, 4], repeat = 9)])).items():
-        for c_key, c_value in dict(collections.Counter([sum(x) for x in itertools.product([1, 2, 3, 4, 5, 6], repeat = 6)])).items():
-            if p_key > c_key:
-                win += p_value * c_value
-            elif p_key < c_key:
-                loss += p_value * c_value
+    for p, p_count in collections.Counter([sum(x) for x in itertools.product([1, 2, 3, 4], repeat=9)]).items():
+        for c, c_count in collections.Counter([sum(x) for x in itertools.product([1, 2, 3, 4, 5, 6], repeat=6)]).items():
+            if p > c:
+                win += p_count * c_count
+            elif p < c:
+                loss += p_count * c_count
             else:
-                draw += p_value * c_value
+                draw += p_count * c_count
             pass
 
     return '{0:.7f}'.format(1.0 / (win + draw + loss) * win)
