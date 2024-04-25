@@ -166,20 +166,16 @@ def dice_game():
     import collections
 
     win = 0
-    draw = 0
-    loss = 0
+    draw_or_loss = 0
 
     for p, p_count in collections.Counter([sum(x) for x in itertools.product([1, 2, 3, 4], repeat=9)]).items():
         for c, c_count in collections.Counter([sum(x) for x in itertools.product([1, 2, 3, 4, 5, 6], repeat=6)]).items():
             if p > c:
                 win += p_count * c_count
-            elif p < c:
-                loss += p_count * c_count
             else:
-                draw += p_count * c_count
-            pass
+                draw_or_loss += p_count * c_count
 
-    return '{0:.7f}'.format(1.0 / (win + draw + loss) * win)
+    return '{0:.7f}'.format(1.0 / (win + draw_or_loss) * win)
 
 
 # 206 https://projecteuler.net/problem=206
