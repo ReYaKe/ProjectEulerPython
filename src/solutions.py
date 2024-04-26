@@ -55,6 +55,18 @@ def large_sum():
     return digits[0:10]
 
 
+# 16 https://projecteuler.net/problem=16
+def power_digit_sum():
+    result = 0
+    current = pow(2, 1000)
+
+    while current > 9:
+        result += current % 10
+        current //= 10
+
+    return result + current
+
+
 # 24 https://projecteuler.net/problem=24
 def lexicographic_permutations():
     # itertools permutations emits values in lexicographic order
