@@ -130,6 +130,29 @@ def number_spiral_diagonals():
     return result
 
 
+# 42 https://projecteuler.net/problem=42
+def coded_triangle_numbers():
+    result = 0
+
+    triangular_numbers = {1}
+    current = 1
+    step_size = 2
+
+    with open('../data/0042_words.txt', 'r') as input_data:
+        words = [x.strip('"') for x in input_data.read().split(',')]
+
+    for word in words:
+        value = sum(ord(d) - 64 for d in word)
+        while value > current:
+            current += step_size
+            step_size += 1
+            triangular_numbers.add(current)
+        if value in triangular_numbers:
+            result += 1
+
+    return result
+
+
 # 43 https://projecteuler.net/problem=43
 def sub_string_divisibility():
     result = 0
