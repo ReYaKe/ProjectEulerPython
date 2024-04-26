@@ -25,6 +25,36 @@ def even_fibonacci_numbers():
     return result
 
 
+# 13 https://projecteuler.net/problem=13
+def large_sum():
+    with open('../data/0013_numbers.txt', 'r') as input_data:
+        numbers = input_data.read().splitlines()
+
+    digits = []
+    current = 0
+
+    # loop over 50 digits backwards
+    for idx in range(49, -1, -1):
+        for line in numbers:
+            # get the integer value of the digit character
+            digit = ord(line[idx]) - 48
+            # accumulate
+            current += digit
+        # append the last digit of the accumulated value...
+        digits.append(current % 10)
+        # ...then drop it
+        current //= 10
+
+    # Append remaining digits that exceed the original 50 digits
+    while current > 0:
+        digits.append(current % 10)
+        current //= 10
+
+    # reverse the digits and return a slice of the first 10 elements
+    digits.reverse()
+    return digits[0:10]
+
+
 # 24 https://projecteuler.net/problem=24
 def lexicographic_permutations():
     # itertools permutations emits values in lexicographic order
