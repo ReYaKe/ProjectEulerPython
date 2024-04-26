@@ -1,7 +1,7 @@
 import itertools
 from itertools import permutations
 import math
-
+from helper_functions import *
 
 # 1 https://projecteuler.net/problem=1
 def multiples_of_3_or_5():
@@ -23,6 +23,12 @@ def even_fibonacci_numbers():
         if current & 1 == 0:
             result += current
     return result
+
+
+# 7
+def prime_10001():
+    n = int(10001 * math.log(10001) + 10001 * math.log(math.log(10001)))
+    return primes2(n)[10000]
 
 
 # 13 https://projecteuler.net/problem=13

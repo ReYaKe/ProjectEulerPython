@@ -2,8 +2,9 @@ from solutions import *
 
 # print("#1 Multiples of 3 or 5: " + str(multiples_of_3_or_5()))
 # print("#2 Even Fibonacci Numbers : " + str(even_fibonacci_numbers()))
+print("#7 10001st Prime : " + str(prime_10001()))
 # print("#13 Large Sum : " + str(large_sum()))
-print("#16 Power Digit Sum : " + str(power_digit_sum()))
+# print("#16 Power Digit Sum : " + str(power_digit_sum()))
 # print("#24 Lexicographic Permutations : " + str(lexicographic_permutations()))
 # print("#26 Reciprocal Cycles : " + str(reciprocal_cycles()))
 # print("#28 Number Spiral Diagonals : " + str(number_spiral_diagonals()))
