@@ -25,10 +25,21 @@ def even_fibonacci_numbers():
     return result
 
 
-# 7
+# 7 https://projecteuler.net/problem=7
 def prime_10001():
     n = int(10001 * math.log(10001) + 10001 * math.log(math.log(10001)))
     return primes2(n)[10000]
+
+
+# 12 https://projecteuler.net/problem=12
+def highly_divisible_triangular_number():
+    triangular_number = 1
+    step_size = 2
+    while len(divisors(triangular_number)) <= 500:
+        triangular_number += step_size
+        step_size += 1
+
+    return triangular_number
 
 
 # 13 https://projecteuler.net/problem=13

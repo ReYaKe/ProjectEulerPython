@@ -2,7 +2,8 @@ from solutions import *
 
 # print("#1 Multiples of 3 or 5: " + str(multiples_of_3_or_5()))
 # print("#2 Even Fibonacci Numbers : " + str(even_fibonacci_numbers()))
-print("#7 10001st Prime : " + str(prime_10001()))
+# print("#7 10001st Prime : " + str(prime_10001()))
+print("#12 Highly Divisible Triangular Number : " + str(highly_divisible_triangular_number()))
 # print("#13 Large Sum : " + str(large_sum()))
 # print("#16 Power Digit Sum : " + str(power_digit_sum()))
 # print("#24 Lexicographic Permutations : " + str(lexicographic_permutations()))
