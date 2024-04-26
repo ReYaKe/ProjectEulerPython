@@ -85,6 +85,22 @@ def reciprocal_cycles():
     return result
 
 
+# 28 https://projecteuler.net/problem=28
+def number_spiral_diagonals():
+    result = 0
+    current = 1
+    step = 2
+    cycle_step = 0
+    while current <= 1001 * 1001:
+        result += current
+        current += step
+        cycle_step += 1
+        if cycle_step == 4:
+            cycle_step = 0
+            step += 2
+    return result
+
+
 # 43 https://projecteuler.net/problem=43
 def sub_string_divisibility():
     result = 0
