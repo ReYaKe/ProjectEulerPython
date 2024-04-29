@@ -201,6 +201,30 @@ def triangular_pentagonal_and_hexagonal():
         n += 1
 
 
+# 55 https://projecteuler.net/problem=55
+def lychrel_numbers():
+    def is_palindrome(number: int):
+        num_string = str(number)
+        for d in range((len(num_string) // 2)):
+            if num_string[d] != num_string[len(num_string) - 1 - d]:
+                return False
+        return True
+
+    def is_lychrel(number: int):
+        for x in range(50):
+            number += int(str(number)[::-1])
+            if is_palindrome(number):
+                return False
+        return True
+
+    result = 0
+    for num in range(10000):
+        if is_lychrel(num):
+            result += 1
+
+    return result
+
+
 # 99 https://projecteuler.net/problem=99
 def largest_exponential():
     def a_greater_b(a, b):

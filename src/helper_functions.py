@@ -1,3 +1,5 @@
+from math import isqrt
+
 def primes2(n):
     # Stolen from this (https://stackoverflow.com/questions/2068372/fastest-way-to-list-all-primes-below-n/3035188#3035188)
     # post on StackOverflow
@@ -12,9 +14,19 @@ def primes2(n):
     return [2, 3] + [3 * i + 1 | 1 for i in range(1, n // 3 - correction) if sieve[i]]
 
 
-def divisors(number: int):
-    from math import isqrt
+def is_prime(number: int):
+    if number <= 3:
+        return number > 1
+    if number % 2 == 0 or number % 3 == 0:
+        return False
+    limit = isqrt(number)
+    for i in range(5, limit + 1, 6):
+        if number % i == 0 or number % (i + 2) == 0:
+            return False
+    return True
 
+
+def divisors(number: int):
     result = set()
 
     for n in range(1, isqrt(number)):
