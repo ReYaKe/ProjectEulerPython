@@ -225,6 +225,56 @@ def lychrel_numbers():
     return result
 
 
+# 81 https://projecteuler.net/problem=81
+def path_sum_two_ways():
+    with open('../data/0081_matrix.txt', 'r') as input_data:
+        matrix = [[[int(y), 0] for y in x.split(',')] for x in input_data.read().splitlines()]
+
+    matrix.reverse()
+    for row in matrix:
+        row.reverse()
+
+    for row_idx in range(len(matrix)):
+        row = matrix[row_idx]
+        for col_idx in range(len(row)):
+            if col_idx < len(row) - 1:
+                val_a = matrix[row_idx][col_idx + 1][0] + matrix[row_idx][col_idx][1]
+                if matrix[row_idx][col_idx + 1][1] == 0:
+                    matrix[row_idx][col_idx + 1][1] = val_a
+                else:
+                    matrix[row_idx][col_idx + 1][1] = min(matrix[row_idx][col_idx + 1][1], val_a)
+            if row_idx < len(matrix) - 1:
+                val_b = matrix[row_idx + 1][col_idx][0] + matrix[row_idx][col_idx][1]
+                if matrix[row_idx + 1][col_idx][1] == 0:
+                    matrix[row_idx + 1][col_idx][1] = val_b
+                else:
+                    matrix[row_idx + 1][col_idx][1] = min(matrix[row_idx + 1][col_idx][1], val_b)
+
+    matrix.reverse()
+    for row in matrix:
+        row.reverse()
+
+    result = 0
+
+    row = 0
+    col = 0
+    while row < len(matrix) - 1 or col < len(matrix[row]) - 1:
+        result += matrix[row][col][0]
+        if row < len(matrix) - 1 and col < len(matrix[row]) - 1:
+            if matrix[row + 1][col][1] < matrix[row][col + 1][1]:
+                row += 1
+            else:
+                col += 1
+        elif row < len(matrix) - 1:
+            row += 1
+        elif col < len(matrix[row]) - 1:
+            col += 1
+
+    result += matrix[len(matrix) - 1][len(matrix[0]) - 1][0]
+
+    return result
+
+
 # 99 https://projecteuler.net/problem=99
 def largest_exponential():
     def a_greater_b(a, b):
