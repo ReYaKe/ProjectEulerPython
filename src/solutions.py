@@ -201,6 +201,169 @@ def triangular_pentagonal_and_hexagonal():
         n += 1
 
 
+# 54 https://projecteuler.net/problem=54
+def poker_hands():
+    hands = ['royal_flush', 'straight_flush',
+             'four_of_a_kind', 'full_house', 'flush', 'straight',
+             'three_of_a_kind', 'two_pairs', 'one_pair']
+
+    cards = ['A', 'K', 'Q', 'J', 'T', '9', '8', '7', '6', '5', '4', '3', '2']
+
+    def get_hand_base_value(player_hand: list[str]) -> int:
+        def is_flush(h: list[str]) -> (bool, int):
+            card_values = [c[0] for c in h]
+            card_suits = [c[1] for c in h]
+            if all(s == card_suits[0] for s in card_suits):
+                card_values = sorted(card_values, key=cards.index)
+                return True, cards.index(card_values[0])
+            return False, 0
+
+        def is_straight(h: list[str]) -> (bool, int):
+            card_values = [c[0] for c in h]
+            card_values = sorted(card_values, key=cards.index)
+            for n in range(len(cards) - 4):
+                straight = cards[n:n + 5:]
+                straight = sorted([c[0] for c in straight], key=cards.index)
+                if card_values == straight:
+                    return True, cards.index(straight[0])
+            return False, 0
+
+        def is_royal_flush(h: list[str]) -> (bool, int):
+            card_values = [c[0] for c in h]
+            if any(n[0] == 'A' for n in card_values) and is_straight_flush(h)[0]:
+                return True, len(cards) - cards.index('A')
+            else:
+                return False, 0
+
+        def is_straight_flush(h: list[str]) -> (bool, int):
+            res_str = is_straight(h)
+            res_fl = is_flush(h)
+            if res_str[0] and res_fl[0]:
+                return True, len(cards) - res_str[1]
+            else:
+                return False, 0
+
+        def is_four_of_a_kind(h: list[str]) -> (bool, int):
+            card_values = [c[0] for c in h]
+            counts = [f for f in card_values if card_values.count(f) == 4]
+            if len(counts) == 4:
+                return True, len(cards) - cards.index(counts[0])
+            else:
+                return False, 0
+
+        def is_full_house(h: list[str]) -> (bool, int):
+            res_3 = is_three_of_a_kind(h)
+            res_2 = is_two_of_a_kind(h)
+            if res_3[0] and res_2[0]:
+                return True, len(cards) - res_3[1]
+            else:
+                return False, 0
+
+        def is_two_pairs(h: list[str]) -> (bool, int):
+            card_values = [c[0] for c in h]
+            groups_of_two: set[str] = set([f for f in card_values if card_values.count(f) == 2])
+            if len(groups_of_two) == 2:
+                ls = list(groups_of_two)
+                return True, len(cards) - min(cards.index(ls[0]), cards.index(ls[1]))
+            else:
+                return False, 0
+
+        def is_three_of_a_kind(h: list[str]) -> (bool, int):
+            card_values = [c[0] for c in h]
+            counts = [f for f in card_values if card_values.count(f) == 3]
+            if len(counts) == 3:
+                return True, len(cards) - cards.index(counts[0])
+            else:
+                return False, 0
+
+        def is_two_of_a_kind(h: list[str]) -> (bool, int):
+            card_values = [c[0] for c in h]
+            counts = [f for f in card_values if card_values.count(f) == 2]
+            if len(counts) == 2:
+                return True, len(cards) - cards.index(counts[0])
+            else:
+                return False, 0
+
+        value = 0
+
+        for x in range(len(hands)):
+            match hands[x]:
+                case 'royal_flush':
+                    res: (bool, int) = is_royal_flush(player_hand)
+                    if res[0]:
+                        value += (len(hands) - x) * 100 + res[1]
+                        break
+                case 'straight_flush':
+                    res: (bool, int) = is_straight_flush(player_hand)
+                    if res[0]:
+                        value += (len(hands) - x) * 100 + res[1]
+                        break
+                case 'four_of_a_kind':
+                    res: (bool, int) = is_four_of_a_kind(player_hand)
+                    if res[0]:
+                        value += (len(hands) - x) * 100 + res[1]
+                        break
+                case 'full_house':
+                    res: (bool, int) = is_full_house(player_hand)
+                    if res[0]:
+                        value += (len(hands) - x) * 100 + res[1]
+                        break
+                case 'flush':
+                    res: (bool, int) = is_flush(player_hand)
+                    if res[0]:
+                        value += (len(hands) - x) * 100 + res[1]
+                        break
+                case 'straight':
+                    res: (bool, int) = is_straight(player_hand)
+                    if res[0]:
+                        value += (len(hands) - x) * 100 + res[1]
+                        break
+                case 'three_of_a_kind':
+                    res: (bool, int) = is_three_of_a_kind(player_hand)
+                    if res[0]:
+                        value += (len(hands) - x) * 100 + res[1]
+                        break
+                case 'two_pairs':
+                    res: (bool, int) = is_two_pairs(player_hand)
+                    if res[0]:
+                        value += (len(hands) - x) * 100 + res[1]
+                        break
+                case 'one_pair':
+                    res: (bool, int) = is_two_of_a_kind(player_hand)
+                    if res[0]:
+                        value += (len(hands) - x) * 100 + res[1]
+                        break
+
+        return value
+
+    def hands_tiebreaker(player_hand_a: list[str], player_hand_b: list[str]) -> bool:
+        for y in range(len(cards)):
+            current_value: str = cards[y]
+            if current_value in (t[0] for t in player_hand_a) and current_value not in (t[0] for t in player_hand_b):
+                return True
+            elif current_value in (t[0] for t in player_hand_b) and current_value not in (t[0] for t in player_hand_a):
+                return False
+
+    with open('../data/0054_poker.txt', 'r') as input_data:
+        player_hands = [[y for y in x.split(' ')] for x in input_data.read().splitlines()]
+
+    result = 0
+
+    for line in player_hands:
+        player_1 = line[:5:]
+        player_2 = line[5::]
+
+        player_1_hand_value = get_hand_base_value(player_1)
+        player_2_hand_value = get_hand_base_value(player_2)
+
+        if player_1_hand_value == player_2_hand_value and player_1_hand_value == 0 and hands_tiebreaker(player_1, player_2):
+            result += 1
+        elif player_1_hand_value > player_2_hand_value:
+            result += 1
+
+    return result
+
+
 # 55 https://projecteuler.net/problem=55
 def lychrel_numbers():
     def is_palindrome(number: int):
@@ -227,6 +390,8 @@ def lychrel_numbers():
 
 # 81 https://projecteuler.net/problem=81
 def path_sum_two_ways():
+    # This is correct but way too complicated.
+    # Could be solved by aggregating values from top left to bottom right, choosing the smaller value of each pair.
     with open('../data/0081_matrix.txt', 'r') as input_data:
         matrix = [[[int(y), 0] for y in x.split(',')] for x in input_data.read().splitlines()]
 
